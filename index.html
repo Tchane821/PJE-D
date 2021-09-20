@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="author" content="univ-lille" />
+<title>
+  Marker
+</title>
+
+<link type="text/css" rel="stylesheet" href="main.css" />
+<script src="lib/opencv.js"></script>
+<script src="script/main.js" type="module"></script>
+
+
+</head>
+
+<body>
+
+<!-- capture source (static image or video/webcam) : will be copied in openCV source to be analyzed-->
+<div id="capture">
+<h3>image and video/webcam capture + Final result</h3>
+
+<img id="image" src="data/imFixe01.png" width="500" height="500"/>
+<video id="video" width="500" height="500" src="data/cap00.webm" autoplay loop controls></video>
+<canvas id="three"width="500" height="500"></canvas>
+</div>
+
+<div id="cvsource">
+<h3>OpenCV source (copy of capture) and feedback (dstcv1 and dstcv2)</h3>
+<!-- openCV source -->
+<canvas id="src" width="500" height="500"></canvas>
+<canvas id="dstcv1" width="500" height="500"></canvas>
+<canvas id="dstcv2" width="500" height="500"></canvas>
+<canvas id="dstcv3" width="500" height="500"></canvas>
+<canvas id="dstcv4" width="500" height="500"></canvas>
+</div>
+
+<div id="extracted">
+  <h3>extracted quad images</h3>
+<canvas id="draw2D" width="500" height="500"></canvas>
+  <!-- marker feedback -->
+<canvas id="feedback0"></canvas>
+<canvas id="feedback1"></canvas>
+<canvas id="feedback2"></canvas>
+<canvas id="feedback3"></canvas>
+
+</div>
+
+<div id="markermatrix">
+  <h3>Matrix marker</h3>
+<canvas id="feedbackM0" width="100" height="100"></canvas>
+<canvas id="feedbackM1" width="100" height="100"></canvas>
+<canvas id="feedbackM2" width="100" height="100"></canvas>
+<canvas id="feedbackM3" width="100" height="100"></canvas>
+</div>
+
+<div id="result">
+  <h3>Results (canvas2D, canvasBg3D)</h3>
+<!-- result -->
+<canvas id="canvas2D" width="500" height="500"></canvas>
+<canvas id="canvasBg3D" width="500" height="500"></canvas>
+</div>
+
+<div id="texture">
+  <h3>texture</h3>
+<!-- texture for feedback-->
+<img id="lagoon" src="data/im.jpg"/>
+<img id="bird" src="data/bird.png"/>
+<img id="jupiter" src="data/jupiter.jpg"/>
+</div>
+
+<audio id="sound" controls><source src="data/02_As_you_know.mp3" type="audio/mpeg"/></audio>
+
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Random Aruco Markers</title>
+  </head>
+  <body>
+
+    <div id="marker">
+    </div>
+
+    <script src="aruco-marker.min.js"></script>
+    <script>
+      var wId = "20px";
+      var wMark = "300px";
+      var hSpace= "200px"
+      var finalHTML="";
+      
+      function marker(k) {
+        var id = k;
+        finalHTML += "<td style='width:"+wId+"'>"+id+"</td><td style='line-height:"+hSpace+";width:"+wMark+"'>"+new ArucoMarker(id).toSVG(wMark)+'</td>';
+      }
+
+      function randomMarker() {
+        marker(Math.floor(Math.random() * 1024));
+      }
+
+      var el = document.getElementById('marker');
+      finalHTML="<table style='width:1600px'/>";
+      let kk=0; // number of generated markers
+      for(let i=0;i<4;++i) { // 4 rows
+        finalHTML+="<tr>";
+        for(let j=0;j<2;++j) { // 2 cols
+          // marker(kk) // will draw the first markers (id 0, id 1, id 2, ...)
+          if (kk==0) {
+            marker(447); // will draw a wanted marker id
+          }
+          else if (kk==1) {
+            marker(868);
+          }
+          else if (kk==2) {
+            marker(689);
+          }
+          else {
+            randomMarker(); // will draw random marker
+          }
+          kk+=1;
+        }
+        finalHTML+="</tr>";
+        
+      }
+      finalHTML+="</table>";
+      el.innerHTML=finalHTML;
+    </script>
+  </body>
+</html>
