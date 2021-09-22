@@ -61,8 +61,8 @@ var mainLoop=function() {
   G.draw2D.clearRect(0,0,500,500);
   for(let i =0; i < markerQuad.length; i++){
     markerQuad[i].draw2D(G.draw2D,'green');
+    Recognizer.extractionQuad(G.src.canvas,markerQuad[i],[500,500],"feedback"+[i]);
   }
-  
 
   // tp2 dessine moi un quad
   //let qad = new Q.Quad();

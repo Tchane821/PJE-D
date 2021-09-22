@@ -67,4 +67,33 @@ export default class Recognizer {
 
     return res;
   }
+
+  // in q notre quad a traiter
+  // in s les dimension {width:... ,height:...} : image width and height
+  // in fb la ou on l'affiche 
+  static extractionQuad(srcCanvas,q,s,fb){
+    let src = cv.imread(srcCanvas);
+    cv.cvtColor(src,src, cv.COLOR_RGBA2GRAY); // nuace de gris
+    cv.blur(src,src,{width : 5, height: 5});
+    cv.adaptiveThreshold(src, src, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 9, 5.0 );
+
+    let quadSrc = cv.matFromArray(4, 1, cv.CV_32FC2, q.toWindow(s) ); // q = notre Quad à traiter
+    let quadDst = cv.matFromArray(4, 1, cv.CV_32FC2, [0, 0, 0, 150, 150,150, 150,0]); // par exemple pour obtenir une image extraite 100x100 pixels à la fin
+    let transform = cv.getPerspectiveTransform(quadSrc, quadDst);
+  
+    let transformImage = new cv.Mat();
+    cv.warpPerspective(src, transformImage, transform, {width:150,height:150}, cv.INTER_LINEAR, cv.BORDER_CONSTANT);
+    
+    //imgshow
+    cv.imshow(fb,transformImage);
+    
+    //delete
+    src.delete();
+    quadSrc.delete();
+    quadDst.delete();
+    transform.delete();
+    transformImage.delete();
+  }
+
+
 }
