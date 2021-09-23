@@ -8,6 +8,8 @@ import * as THREE from '../lib/three/build/three.module.js';
 
 import * as Q from  './Quad.js';
 
+import { MarkerMatrix } from './Markermatrix.js';
+
 /**
  * main (loading, launch)
  *
@@ -19,14 +21,7 @@ const main=function() {
   Wait.waitAll().then(initialize).catch(mess => console.log(mess,mess.stack));
 }
 
-
-/**
- * initialize
- *
- *
- *
- */
-
+// init
 const initialize=function() {
   console.log('start');
 
@@ -36,41 +31,29 @@ const initialize=function() {
 }
 
 
-
-/**
- * mainLoop
- *
- *
- *
- */
-
+// mainloop
 var mainLoop=function() {
   /**
   * Tp 1 EX2
   */
-  let ratio=G.captureHeight/G.captureWidth;
-  let w=G.src.canvas.width, h=G.src.canvas.height;
-  G.src.fillStyle="lightyellow"; // to set a background color to the source
+  let ratio = G.captureHeight/G.captureWidth;
+  let w = G.src.canvas.width, h = G.src.canvas.height;
+  G.src.fillStyle="lightblue"; // to set a background color to the source
   G.src.fillRect(0,0,w,h);
   G.src.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   G.ctx2D.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   
-
-  // tp2Q6
   let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // returns array of {id : quad, ...}
   G.draw2D.clearRect(0,0,500,500);
+  let matrix = new MarkerMatrix();
   for(let i =0; i < markerQuad.length; i++){
     markerQuad[i].draw2D(G.draw2D,'green');
-    Recognizer.extractionQuad(G.src.canvas,markerQuad[i],[500,500],"feedback"+[i]);
+    let extractedMarker = Recognizer.extractionQuad(G.src.canvas,markerQuad[i],[500,500],"feedback"+[i]);
+    if (matrix.fromImg(extractedMarker)){
+      matrix.drawMatrix([150,150],"feedbackM"+[i]);
+    }
+    extractedMarker.delete();
   }
-
-  // tp2 dessine moi un quad
-  //let qad = new Q.Quad();
-  //qad.toWindow(500,500,[100,100,300,100,300,300,100,300]);
-  //qad.draw2D(G.draw2D,'green');
-  
-  
-
 
   window.requestAnimationFrame(mainLoop);
 }
