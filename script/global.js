@@ -34,7 +34,5 @@ export default class G {
      G.captureWidth=G.capture.naturalWidth;
      G.captureHeight=G.capture.naturalHeight;
     }
-
-
   }
 }

@@ -44,13 +44,16 @@ export class MarkerMatrix {
   // fb la ou sa va afficher
   drawMatrix(s,fb){
     let fbctx = document.getElementById(fb).getContext('2d');
+    if(fb == "feedbackM0"){
+      let mat = document.getElementById("mat");   
+      mat.textContent = this.m; 
+    }
     let width = s[0]; let height = s[1];
     let stepX=width /7.0; 
     let stepY=height/7.0;
-    let idx = 0;
     for(let i =0; i < 7; i++){
         for(let j = 0; j < 7 ; j++){
-            if(this.m[idx + j] == 0){
+            if(this.m[i * 7 + j] == 0){
               fbctx.fillStyle = 'black';
               fbctx.fillRect(i*stepX,j*stepY,stepX,stepY);
             }else{
@@ -58,7 +61,6 @@ export class MarkerMatrix {
               fbctx.fillRect(i*stepX,j*stepY,stepX,stepY);
             }
         }
-        idx += 7;
     }
   }
 
