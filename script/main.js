@@ -50,7 +50,8 @@ var mainLoop=function() {
     markerQuad[i].draw2D(G.draw2D,'green');
     let extractedMarker = Recognizer.extractionQuad(G.src.canvas,markerQuad[i],[500,500],"feedback"+[i]);
     if (matrix.fromImg(extractedMarker)){
-      matrix.drawMatrix([150,150],"feedbackM"+[i]);
+      matrix.drawMatrix([150,150],"feedbackM"+i);
+      matrix.writeId("idMatrix"+i);
     }
     extractedMarker.delete();
   }

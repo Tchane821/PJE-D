@@ -16,8 +16,8 @@ export class MarkerMatrix {
        let dOfV = 6;
        let possibleValue;
        let idOfPossibleValue = -1; //absurd init
-       for(let k = 0; k <4 ; k++){ // pour chaque ids possible
-          let oneDot = getDistanceOfBestvalue(ids[k],lOfLines[i]); // {id,distance}
+       for(let k = 0; k < 4 ; k++){ // pour chaque ids possible
+          let oneDot = this.getDistanceOfBestvalue(ids[k],lOfLines[i]); // {id,distance}
           if (oneDot[1] <=  dOfV){
             possibleValue = oneDot;
             dOfV = oneDot[1];
@@ -25,7 +25,7 @@ export class MarkerMatrix {
           }
        }
        dTot += dOfV;
-       markerId += k * (4**i);
+       markerId += idOfPossibleValue * (4**i);
     }
     return {id:markerId,distance:dTot};
   }
@@ -49,10 +49,8 @@ export class MarkerMatrix {
   fromImg(src) {
     let stepX=src.cols/7.0; // src.cols = width of the image; there are 7 cols in marker (the 2 borders + 5 values)
     let stepY=src.rows/7.0; // similar for rows/height
-
     let centerX=stepX/2.0; // first col (of the first center square)
     let centerY=stepY/2.0; // first row
-
     let square=0;
     for(let y=0;y<7;++y) {
       centerX=stepX/2.0; // start row (first col)
@@ -84,10 +82,6 @@ export class MarkerMatrix {
   // fb la ou sa va afficher
   drawMatrix(s,fb){
     let fbctx = document.getElementById(fb).getContext('2d');
-    if(fb == "feedbackM0"){
-      let mat = document.getElementById("mat");   
-      mat.textContent = this.m; 
-    }
     let width = s[0]; let height = s[1];
     fbctx.fillStyle = 'white';
     fbctx.fillRect(0,0,width,height);
@@ -115,6 +109,14 @@ export class MarkerMatrix {
         res.push(this.getLine(i));
     }
     return res;
+  }
+
+
+  // ecrit l'id dans fb
+  writeId(fb){
+    let id = document.getElementById(fb);
+    let dico = this.nearestId();   
+    id.textContent = dico["distance"];
   }
 
 }
