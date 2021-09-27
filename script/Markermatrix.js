@@ -5,7 +5,6 @@ export class MarkerMatrix {
     }
 
 
-
   // return : {id : , dist : } : the nearest marker id at distance dist of this.m matrix
   nearestId() {
     let ids = [ [1,0,0,0,0], [1,0,1,1,1], [0,1,0,0,1], [0,1,1,1,0] ] // or [16, 23, 9, 14] or ... // possible values of a row
@@ -44,7 +43,6 @@ export class MarkerMatrix {
   }
 
 
-
   // set this.m from image (should be an extracted quad image)
   // in : src(cv.Mat) : image of a candidate marker
   // return : true/false if success/fail (fails if bad border, or no black/white bits => cant be a candidate marker) 
@@ -81,6 +79,7 @@ export class MarkerMatrix {
     return true;
   }
 
+
   // s [width, height]
   // fb la ou sa va afficher
   drawMatrix(s,fb){
@@ -104,6 +103,7 @@ export class MarkerMatrix {
     }
   }
 
+
   //return line i of m [x0,x1,x2,x3,x4]
   getLine(i){
     return this.m.slice(i*5,i*5+5);
@@ -117,5 +117,4 @@ export class MarkerMatrix {
     return res;
   }
 
-
-  }
+}
