@@ -11,6 +11,7 @@ static waitOpenCV() {
     // OpenCV is loaded async : waiting for variable cv to be available :
     let waitingReady= () => {if (cv) {console.log("...");window.clearInterval(retry);cv['onRuntimeInitialized']=()=>{console.log("openCV ready");resolve()}}}; // openCV is ready
     let retry = window.setInterval(waitingReady,500);
+    waitingReady();
   });
 }
 

@@ -1,6 +1,6 @@
 export class Quad { // 2D quad
     constructor() {
-      this.t=[0,0,1,0,1,1,0,1]; // [x0,y0,x1,y1,x2,y2,x3,y3] //resolution de sortie dans openCV
+      this.t=[0,0,0,1,1,1,1,0]; // [x0,y0,x1,y1,x2,y2,x3,y3] //resolution de sortie dans openCV
     }
   
     copy(q) {

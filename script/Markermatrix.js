@@ -7,37 +7,38 @@ export class MarkerMatrix {
 
   // return : {id : , dist : } : the nearest marker id at distance dist of this.m matrix
   nearestId() {
-    let ids = [ [1,0,0,0,0], [1,0,1,1,1], [0,1,0,0,1], [0,1,1,1,0] ] // or [16, 23, 9, 14] or ... // possible values of a row
-    let markerId=0; // computed id
-    let dTot=0;     // total distance for the 5 rows
-    let lOfLines= this.getLines();
-    
-    for(let i = 0; i < 5; i++){ // pour chaque ligne du tableau
-       let dOfV = 6;
-       let possibleValue;
-       let idOfPossibleValue = -1; //absurd init
-       for(let k = 0; k < 4 ; k++){ // pour chaque ids possible
-          let oneDot = this.getDistanceOfBestvalue(ids[k],lOfLines[i]); // {id,distance}
-          if (oneDot[1] <=  dOfV){
-            possibleValue = oneDot;
-            dOfV = oneDot[1];
-            idOfPossibleValue = k;
-          }
-       }
-       dTot += dOfV;
-       markerId += idOfPossibleValue * (4**i);
+    let ids = [[1,0,0,0,0], [1,0,1,1,1], [0,1,0,0,1], [0,1,1,1,0]]; // [ [0], [1], [2], [3] ]
+    let lesLignes = this.getLines();
+    let potencielMarker = []; // Liste de 5 dictionaires {id:Numligne, dist:nbErreur}
+    for(let lm=0; lm < 5;lm++){ // pour chaque ligne du marker
+      let minErreurLinesValues = {values:[] , dist:6}; //{id et dist} 6  sera forcement ecraser
+      for(let lids=0; lids < 4 ; lids++){ // pour chaque possibiliter de ids
+        let tmpCalcVal = this.getDistanceOfValue(ids[lids],lesLignes[lm]);
+        if(minErreurLinesValues["dist"] > tmpCalcVal["dist"]){
+          minErreurLinesValues = tmpCalcVal;
+        }
+      }
+      potencielMarker[lm] = minErreurLinesValues;
     }
+
+    // Calcule de l'id du potenciel marker 
+    let markerId = 0;
+    let dTot = 0;
+    for(let k=0; k<5; k++){
+      dTot += potencielMarker[k]["dist"];
+      markerId = markerId + ids.findIndex( id => id === potencielMarker[k]["values"] ) * (4**k );
+    }
+
     return {id:markerId,distance:dTot};
   }
 
-  getDistanceOfBestvalue(id,line){
-    let res = [id , 0] ;
+  //return {values:,dist}
+  getDistanceOfValue(id,line){
+    let res = {values:id , dist:0} ;
     for(let i=0; i < 5;i++){ // id
-      for(let j=0; j < 5;j++){ // line
-         if(id[i] != line[j]){
-            res[1]++;
+         if(id[i] != line[i]){
+            res["dist"] = res["dist"] + 1 ;
          }
-      }
     }
     return res;
   }
@@ -59,7 +60,6 @@ export class MarkerMatrix {
         let dst=src.roi({x:centerX-1,y:centerY-1,width:3,height:3}); // crop at center of the square (3x3 pixels)
         let nbWhite=cv.countNonZero(dst);                            // count white pixels of the 3x3 pixels
         dst.delete(); // dst is useless now
-
         if (nbWhite>7) {valueSquare=1;} // white value
         else if (nbWhite<2) {valueSquare=0;} // black value
         if (valueSquare==-1) return false; // neither black nor white => rejected
@@ -88,10 +88,10 @@ export class MarkerMatrix {
     let stepX=width /5.0; 
     let stepY=height/5.0;
     fbctx.fillStyle = 'black';
-    for(let i = 0; i < 5; i++){
-        for(let j = 0; j < 5; j++){
-            if(this.m[i * 5 + j] == 0){
-              fbctx.fillRect(i*stepX,j*stepY,stepX,stepY);
+    for(let y = 0; y < 5; y++){
+        for(let x = 0; x < 5; x++){
+            if(this.m[y * 5 + x] == 0){
+              fbctx.fillRect(x*stepX,y*stepY,stepX,stepY);
             }
         }
     }
@@ -116,7 +116,7 @@ export class MarkerMatrix {
   writeId(fb){
     let id = document.getElementById(fb);
     let dico = this.nearestId();   
-    id.textContent = dico["distance"];
+    id.textContent = dico["distance"] + " -- " + dico["id"];
   }
 
 }
