@@ -4,6 +4,47 @@ export class MarkerMatrix {
       this.m=[]; // array of 25 values (5x5 values : first line = first 5 values, ... i.e. row majors representation)
     }
 
+
+
+  // return : {id : , dist : } : the nearest marker id at distance dist of this.m matrix
+  nearestId() {
+    let ids = [ [1,0,0,0,0], [1,0,1,1,1], [0,1,0,0,1], [0,1,1,1,0] ] // or [16, 23, 9, 14] or ... // possible values of a row
+    let markerId=0; // computed id
+    let dTot=0;     // total distance for the 5 rows
+    let lOfLines= this.getLines();
+    
+    for(let i = 0; i < 5; i++){ // pour chaque ligne du tableau
+       let dOfV = 6;
+       let possibleValue;
+       let idOfPossibleValue = -1; //absurd init
+       for(let k = 0; k <4 ; k++){ // pour chaque ids possible
+          let oneDot = getDistanceOfBestvalue(ids[k],lOfLines[i]); // {id,distance}
+          if (oneDot[1] <=  dOfV){
+            possibleValue = oneDot;
+            dOfV = oneDot[1];
+            idOfPossibleValue = k;
+          }
+       }
+       dTot += dOfV;
+       markerId += k * (4**i);
+    }
+    return {id:markerId,distance:dTot};
+  }
+
+  getDistanceOfBestvalue(id,line){
+    let res = [id , 0] ;
+    for(let i=0; i < 5;i++){ // id
+      for(let j=0; j < 5;j++){ // line
+         if(id[i] != line[j]){
+            res[1]++;
+         }
+      }
+    }
+    return res;
+  }
+
+
+
   // set this.m from image (should be an extracted quad image)
   // in : src(cv.Mat) : image of a candidate marker
   // return : true/false if success/fail (fails if bad border, or no black/white bits => cant be a candidate marker) 
@@ -61,6 +102,19 @@ export class MarkerMatrix {
             }
         }
     }
+  }
+
+  //return line i of m [x0,x1,x2,x3,x4]
+  getLine(i){
+    return this.m.slice(i*5,i*5+5);
+  }
+  //return list of line
+  getLines(){
+    let res = [];
+    for(let i = 0 ; i < 5; i++){
+        res.push(this.getLine(i));
+    }
+    return res;
   }
 
 
