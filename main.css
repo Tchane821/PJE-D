@@ -5,3 +5,7 @@ display:block;
 #texture {
 display:none;
 }
+
+.matrixNB {
+    border: 15px black solid;
+}

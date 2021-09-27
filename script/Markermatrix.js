@@ -49,15 +49,14 @@ export class MarkerMatrix {
       mat.textContent = this.m; 
     }
     let width = s[0]; let height = s[1];
-    let stepX=width /7.0; 
-    let stepY=height/7.0;
-    for(let i =0; i < 7; i++){
-        for(let j = 0; j < 7 ; j++){
-            if(this.m[i * 7 + j] == 0){
-              fbctx.fillStyle = 'black';
-              fbctx.fillRect(i*stepX,j*stepY,stepX,stepY);
-            }else{
-              fbctx.fillStyle = 'white';
+    fbctx.fillStyle = 'white';
+    fbctx.fillRect(0,0,width,height);
+    let stepX=width /5.0; 
+    let stepY=height/5.0;
+    fbctx.fillStyle = 'black';
+    for(let i = 0; i < 5; i++){
+        for(let j = 0; j < 5; j++){
+            if(this.m[i * 5 + j] == 0){
               fbctx.fillRect(i*stepX,j*stepY,stepX,stepY);
             }
         }
