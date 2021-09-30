@@ -79,9 +79,21 @@ export default class Recognizer {
     cv.threshold (src, src, luminositerMoyenne, 255, cv.THRESH_BINARY);
     cv.imshow("feedbackM",src);
 
-    let quadSrc = cv.matFromArray(4, 1, cv.CV_32FC2, q.toWindow(s) ); // q = notre Quad à traiter
-    let quadDst = cv.matFromArray(4, 1, cv.CV_32FC2, [0, 0, 0, 150, 150,150, 150,0]); // par exemple pour obtenir une image extraite 100x100 pixels à la fin
-    let transform = cv.getPerspectiveTransform(quadSrc, quadDst);
+    //test determinant
+    let quadSrc = new Q.Quad;
+    quadSrc.copy(q);
+    let v1 = [ quadSrc.t[0] - quadSrc.t[6], quadSrc.t[1] - quadSrc.t[7] ];
+    let v2 = [ quadSrc.t[2] - quadSrc.t[0], quadSrc.t[3] - quadSrc.t[1] ];
+    let determ = v1[0]*v2[1] - v1[1]*v2[0]; // x1*y2 - y1*x2 
+    let quadDst = new Q.Quad;
+    if( determ < 0){
+      // sens horaire
+      quadDst.setFromWindow(150,150,[0, 0, 150, 0, 150, 150, 0, 150]);
+    }else{
+      quadDst.setFromWindow(150,150,[0, 0, 0, 150, 150, 150, 150, 0]);
+      // sense anti horaire
+    }
+    let transform = cv.getPerspectiveTransform(quadSrc.toWindow(s).t, quadDst.toWindow(s).t);
   
     let transformImage = new cv.Mat();
     cv.warpPerspective(src, transformImage, transform, {width:150,height:150}, cv.INTER_LINEAR, cv.BORDER_CONSTANT);
@@ -98,6 +110,4 @@ export default class Recognizer {
     transformImage.delete();
     return res;
   }
-
-
 }

@@ -2,7 +2,7 @@ import G from './global.js';
 
 
 export default class Wait {
-  
+
   
 static waitOpenCV() {
   console.log("waiting OpenCV ...");
