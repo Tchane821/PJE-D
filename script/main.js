@@ -27,15 +27,14 @@ const initialize=function() {
 
   G.initGlobal();
 
+  
   mainLoop();
 }
 
 
 // mainloop
 var mainLoop=function() {
-  /**
-  * Tp 1 EX2
-  */
+
   let ratio = G.captureHeight/G.captureWidth;
   let w = G.src.canvas.width, h = G.src.canvas.height;
   G.src.fillStyle="lightblue"; // to set a background color to the source
@@ -50,8 +49,8 @@ var mainLoop=function() {
     markerQuad[i].draw2D(G.draw2D,'green');
     let extractedMarker = Recognizer.extractionQuad(G.src.canvas,markerQuad[i],[500,500],"feedback"+[i]);
     if (matrix.fromImg(extractedMarker)){
-      matrix.drawMatrix([150,150],"feedbackM"+i);
       matrix.writeId("idMatrix"+i);
+      matrix.drawMatrix([150,150],"feedbackM"+i);
     }
     extractedMarker.delete();
   }

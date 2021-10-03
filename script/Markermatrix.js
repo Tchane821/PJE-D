@@ -5,6 +5,43 @@ export class MarkerMatrix {
     }
 
 
+  // return : {id:id,dist:int,rot:int}
+  // 0 <= rot <= 270    dist < 25     id >= -1
+  recognize(){
+    let dico = this.nearestId();
+    let distance = dico["distance"];
+    let brot = 0;
+    let bestId = dico["id"];
+    if (distance == 0) return {id:bestId,dist:distance,rot:brot};
+    for(let rot = 1; rot <= 3 ; ++rot){
+       this.rotaterM90();
+       let dicoT = this.nearestId();
+       let tempD = dicoT["distance"];
+       let tempId = dicoT["id"];
+       if (tempD < distance){
+         distance = tempD;
+         bestId = tempId;
+         brot = rot;
+       }
+       if (distance == 0) return {id:bestId,dist:distance,rot:brot*90};
+    }
+    if(distance >= 15) return {id:-1,dist:25,rot:-1};
+    return {id:bestId,dist:distance,rot:brot*90};
+  }
+
+  rotaterM90(){
+      let mt = [];
+      for (let i = 0; i < 25 ; i++){
+        let x = i % 5;
+        let y = Math.floor(i / 5);
+        let nx = 5 - y -1 ;
+        let ny = x;
+        let np = ny * 5 + nx;
+        mt[np] = this.m[i];
+      }
+      this.m = mt;
+  }
+
   // return : {id : , dist : } : the nearest marker id at distance dist of this.m matrix
   nearestId() {
     let ids = [[1,0,0,0,0], [1,0,1,1,1], [0,1,0,0,1], [0,1,1,1,0]]; // [ [0], [1], [2], [3] ]
@@ -115,8 +152,8 @@ export class MarkerMatrix {
   // ecrit l'id dans fb
   writeId(fb){
     let id = document.getElementById(fb);
-    let dico = this.nearestId();   
-    id.textContent = dico["distance"] + " -- " + dico["id"];
+    let dico = this.recognize();   
+    id.textContent = " d:" + dico["dist"] + " -- id:" + dico["id"] + " -- r:" + dico["rot"] ;
   }
 
 }
