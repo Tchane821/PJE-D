@@ -1,20 +1,11 @@
 import Wait from './wait.js';
-
 import Recognizer from './recognizer.js';
-
 import G from './global.js';
-
 import * as THREE from '../lib/three/build/three.module.js';
-
 import * as Q from  './Quad.js';
-
 import { MarkerMatrix } from './Markermatrix.js';
 
-/**
- * main (loading, launch)
- *
- */
-
+// Main 
 const main=function() {
 
   // waiting for openCV loading and webcam setup. Call initialize when ok.
@@ -24,10 +15,7 @@ const main=function() {
 // init
 const initialize=function() {
   console.log('start');
-
   G.initGlobal();
-
-  
   mainLoop();
 }
 
@@ -43,6 +31,7 @@ var mainLoop=function() {
   G.ctx2D.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   
   let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // returns un tab de [{matrice,quad},...]
+  //console.log(markerQuad.length);
   G.draw2D.clearRect(0,0,500,500);
   for(let i =0; i < markerQuad.length; i++){
     markerQuad[i]["quad"].draw2D(G.draw2D,'green');

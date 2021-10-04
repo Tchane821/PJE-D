@@ -37,7 +37,7 @@ export class Quad { // 2D quad
       ctx.beginPath();
       let pts = this.toWindow([ctx.canvas.width,ctx.canvas.height]);
       ctx.strokeStyle = color;
-      ctx.fillRect(pts[0],pts[1],3,3);
+      ctx.fillRect(pts[0],pts[1],4,4);
       ctx.moveTo(pts[0],pts[1]);
       ctx.lineTo(pts[2],pts[3]);
       ctx.lineTo(pts[4],pts[5]);
