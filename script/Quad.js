@@ -12,7 +12,7 @@ export class Quad { // 2D quad
     clone(){
       let qr = new Quad();
       for(let i=0;i<8;++i) {
-        qr[i]=this.t[i];
+        qr.t[i]=this.t[i];
       }
       return qr;
     }
@@ -42,6 +42,7 @@ export class Quad { // 2D quad
     // in : ctx : 2d context of a canvas
     // in : 2d context color of the quad ('red' for example)
     draw2D(ctx,color) {
+      console.log(this.t);
       ctx.beginPath();
       let pts = this.toWindow([ctx.canvas.width,ctx.canvas.height]);
       ctx.strokeStyle = color;

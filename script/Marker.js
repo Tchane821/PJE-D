@@ -10,7 +10,7 @@ export class Marker {
       this.quad.copy(quad);
     }
   
-    draw2D(ctx) {
+    drawMarker(ctx) {
      this.quad.draw2D(ctx,this.color);
     }
   }
