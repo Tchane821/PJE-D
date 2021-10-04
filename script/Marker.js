@@ -1,16 +1,17 @@
-import { Quad } from './Quad.js';
+import {Quad} from './Quad.js';
+
 export class Marker {
     constructor(id) {
-      this.id=id;
-      this.quad = new Quad(); // this is the owner
-      this.color="green"; // quad color
+        this.id = id;
+        this.quad = new Quad(); // this is the owner
+        this.color = "green"; // quad color
     }
 
     update(quad) {
-      this.quad.copy(quad);
+        this.quad.copy(quad);
     }
-  
+
     drawMarker(ctx) {
-     this.quad.draw2D(ctx,this.color);
+        this.quad.draw2D(ctx, this.color);
     }
-  }
+}
