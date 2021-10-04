@@ -42,17 +42,12 @@ var mainLoop=function() {
   G.src.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   G.ctx2D.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   
-  let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // returns array of {id : quad, ...}
+  let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // returns un tab de [{matrice,quad},...]
   G.draw2D.clearRect(0,0,500,500);
-  let matrix = new MarkerMatrix();
   for(let i =0; i < markerQuad.length; i++){
-    markerQuad[i].draw2D(G.draw2D,'green');
-    let extractedMarker = Recognizer.extractionQuad(G.src.canvas,markerQuad[i],[500,500],"feedback"+[i]);
-    if (matrix.fromImg(extractedMarker)){
-      matrix.writeId("idMatrix"+i);
-      matrix.drawMatrix([150,150],"feedbackM"+i);
-    }
-    extractedMarker.delete();
+    markerQuad[i]["quad"].draw2D(G.draw2D,'green');
+    markerQuad[i]["matrice"].writeId("idMatrix"+i);
+    markerQuad[i]["matrice"].drawMatrix([150,150],"feedbackM"+i);
   }
 
   window.requestAnimationFrame(mainLoop);

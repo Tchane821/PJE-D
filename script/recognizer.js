@@ -1,4 +1,6 @@
 import * as Q from  './Quad.js';
+import * as Mm from './Markermatrix.js';
+import G from './global.js';
 export default class Recognizer {
 
   // in : srcCanvas (DOM Element canvas) : contains the image to analyze
@@ -42,8 +44,14 @@ export default class Recognizer {
     //calcul de res
     for(let i = 0 ;i < lesbonsContours.size() ;i++){
       let q = new Q.Quad();
+      let mat = new Mm.MarkerMatrix();
       q.setFromWindow(src.size().width,src.size().height,lesbonsContours.get(i).data32S)
-      res.push(q);
+      let extractedMarker = this.extractionQuad(G.src.canvas,q,[500,500],"feedback"+[i]);
+      if(mat.fromImg(extractedMarker)){
+        let dicoRes = mat.recognize();
+        q.rotateQ90i(dicoRes["rot"]/90);
+        res.push({matrice:mat,quad:q});
+      }
     }
 
     //draw canvas
