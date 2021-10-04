@@ -37,5 +37,4 @@ var mainLoop = function () {
     window.requestAnimationFrame(mainLoop);
 }
 
-
 window.addEventListener("load", main);
