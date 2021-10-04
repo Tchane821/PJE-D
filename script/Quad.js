@@ -8,6 +8,14 @@ export class Quad { // 2D quad
         this.t[i]=q.t[i];
       }
     }
+
+    clone(){
+      let qr = new Quad();
+      for(let i=0;i<8;++i) {
+        qr[i]=this.t[i];
+      }
+      return qr;
+    }
   
     // in : width, height of the image
     // in : t a 8-values array [x0,y0, ...] of the quad in window coordinates
@@ -60,5 +68,4 @@ export class Quad { // 2D quad
       }
       this.t = qt.flat();
     }
-
 }

@@ -6,7 +6,7 @@ export default class Recognizer {
   // in : srcCanvas (DOM Element canvas) : contains the image to analyze
   // return : {id1 : quad1, id2 : quad2, ...} : all recognized marker id (int) with their (normalized) quad (Quad)
   static recognizeMarker(srcCanvas) {
-    let res=[]
+    let res = new Map();
 
     let src = cv.imread(srcCanvas); // src set to a cv.Mat image
     let dst = src.clone();  // dst is a copy
@@ -50,7 +50,11 @@ export default class Recognizer {
       if(mat.fromImg(extractedMarker)){
         let dicoRes = mat.recognize();
         q.rotateQ90i(dicoRes["rot"]/90);
-        res.push({matrice:mat,quad:q});
+        if(dicoRes["id"] != -1){
+          mat.drawMatrix([150,150],"feedbackM"+i);
+          mat.writeId("idMatrix"+i);
+          res.set(dicoRes["id"],q);
+        }
       }
     }
 
@@ -70,7 +74,6 @@ export default class Recognizer {
     dstBonCont.delete();
     lesbonsContours.delete();
     hierarchy.delete();
-
     return res;
   }
 

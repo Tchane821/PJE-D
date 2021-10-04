@@ -1,3 +1,4 @@
+import { MarkerManager } from './MarkerManager.js';
 export default class G {
   // GLOBALS :
 
@@ -12,6 +13,7 @@ export default class G {
 
   static ctx2D;         // context2D : 2D drawing feedback
   static draw2D;        // espace de desssin du test du Tp2Q5
+  static markersManager = new MarkerManager(); // mon marker manager
 
 
   // default globals setup
@@ -21,7 +23,6 @@ export default class G {
     G.ctx2D=document.getElementById("canvas2D").getContext('2d');      // context of the 2D feedback
 
     G.draw2D=document.getElementById("draw2D").getContext('2d');              // contexte du Tp2Q5
-
 
     // set G.capture from video/webcam/image
     if (G.captureMode=="video" || G.captureMode=="webcam") {

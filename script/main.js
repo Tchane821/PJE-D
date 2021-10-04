@@ -19,7 +19,6 @@ const initialize=function() {
   mainLoop();
 }
 
-
 // mainloop
 var mainLoop=function() {
 
@@ -30,15 +29,11 @@ var mainLoop=function() {
   G.src.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   G.ctx2D.drawImage(G.capture,0,0,G.captureWidth,G.captureHeight,0,(h-h*ratio)/2,w,h*ratio);
   
-  let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // returns un tab de [{matrice,quad},...]
-  //console.log(markerQuad.length);
-  G.draw2D.clearRect(0,0,500,500);
-  for(let i =0; i < markerQuad.length; i++){
-    markerQuad[i]["quad"].draw2D(G.draw2D,'green');
-    markerQuad[i]["matrice"].writeId("idMatrix"+i);
-    markerQuad[i]["matrice"].drawMatrix([150,150],"feedbackM"+i);
-  }
+  let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // renvoie une map {K:id,V:quad}
+  G.markersManager.updateFromRecognizer(markerQuad);
 
+  G.markersManager.drawAllQuad(G.draw2D);
+  
   window.requestAnimationFrame(mainLoop);
 }
 

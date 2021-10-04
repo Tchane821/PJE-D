@@ -2,6 +2,7 @@ export class MarkerMatrix {
     // 5x5 bits matrix of a marker : 0 (black) or 1 (white)
     constructor() {
       this.m=[]; // array of 25 values (5x5 values : first line = first 5 values, ... i.e. row majors representation)
+      this.id =-1;
     }
 
 
@@ -26,6 +27,7 @@ export class MarkerMatrix {
        if (distance == 0) return {id:bestId,dist:distance,rot:brot*90};
     }
     if(distance >= 15) return {id:-1,dist:25,rot:-1};
+    this.id=bestId;
     return {id:bestId,dist:distance,rot:brot*90};
   }
 
