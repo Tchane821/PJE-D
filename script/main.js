@@ -31,8 +31,8 @@ var mainLoop = function () {
 
     let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // renvoie une map {K:id,V:quad}
     G.markersManager.updateFromRecognizer(markerQuad);
-    G.markersManager.drawAllQuad(G.draw2D);
     G.draw2D.clearRect(0, 0, 500, 500);
+    G.markersManager.drawAllQuad(G.draw2D);
 
     window.requestAnimationFrame(mainLoop);
 }
