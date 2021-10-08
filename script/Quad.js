@@ -71,8 +71,7 @@ export class Quad { // 2D quad
                 let x = k % 5;
                 let y = Math.floor(k / 5);
                 let nx = 5 - y - 1;
-                let ny = x;
-                let np = ny * 5 + nx;
+                let np = x * 5 + nx;
                 qt[np] = this.t[k];
             }
         }
