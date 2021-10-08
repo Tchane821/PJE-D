@@ -1,7 +1,7 @@
 import Wait from './wait.js';
 import Recognizer from './recognizer.js';
 import G from './global.js';
-import {Image2D} from './Image2D.js';
+
 
 // Main 
 const main = function () {
@@ -29,12 +29,13 @@ const mainLoop = function () {
     G.markersManager.drawAllQuad(G.draw2D);
 
     //three and renderer
-    let img2d = new Image2D('poluSSJ2');
-    let qt = G.markersManager.mesMarker.get(103);
-    if (qt !== undefined){
-        img2d.update(qt)
-    }
     G.scene2D.background.needsUpdate = true;
+    if (G.markersManager.mesMarker.has(1017)){
+        let mk = G.markersManager.mesMarker.get(1017);
+        if (mk.quad !== undefined){
+            G.img2d1.update(mk.quad)
+        }
+    }
     G.renderer.render(G.scene2D,G.camera2D);
 
 

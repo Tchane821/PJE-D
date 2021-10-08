@@ -1,5 +1,6 @@
 import {MarkerManager} from './MarkerManager.js';
 import * as THREE from '../lib/three/build/three.module.js';
+import {Image2D} from './Image2D.js';
 
 export default class G {
     // GLOBALS :
@@ -20,6 +21,7 @@ export default class G {
     static camera2D;     // camera 2D (orthographic)
     static renderer;     // THREE.js renderer
     static scene2D;      // 2D scene (THREE.js) : example : texture onto 2D quad (without 3D pose)
+    static img2d1;
 
 
     // default globals setup
@@ -44,12 +46,12 @@ export default class G {
         // three js
         G.scene2D = new THREE.Scene();
         G.scene2D.background = new THREE.CanvasTexture(G.src.canvas);
-
-        G.camera2D = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1);
+        G.camera2D = new THREE.OrthographicCamera(-1, 1, -1, 1, -1, 1);
         G.camera2D.position.set(0, 0, 0);
-
-        G.renderer = new THREE.WebGLRenderer({canvas: document.getElementById("three")});
+        G.renderer = new THREE.WebGLRenderer({canvas:document.getElementById("three") });
         G.renderer.setSize(500, 500);
-
+        G.renderer.autoClear = true;
+        // objects
+        G.img2d1 = new Image2D('poluSSJ2');
     }
 }
