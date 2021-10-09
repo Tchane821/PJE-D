@@ -11,6 +11,7 @@ export class MarkerManager {
     makeMarker(id, q) {
         let m = new Marker(id);
         m.update(q);
+        this.mesMarker.set(id,m);
         return m;
     }
 
@@ -20,17 +21,16 @@ export class MarkerManager {
         this.mesMarker.set(k, m);
     }
 
-    // in : allReco is map {K:id,V:Value} value qua(from Recognize.recognizeMarker)
+    // in : allReco is map {K:id,V:Value} Value == quad (from Recognize.recognizeMarker)
     updateFromRecognizer(allReco) {
         for (const [key, value] of allReco.entries()) {
-            this.update(key, value.clone());
+            this.update(key, value);
         }
     }
 
     // draw all markers
     drawAllQuad(ctx) {
         for (const mark of this.mesMarker.values()) {
-            //console.log(val);
             mark.drawMarker(ctx);
         }
     }

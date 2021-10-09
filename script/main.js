@@ -1,6 +1,7 @@
 import Wait from './wait.js';
 import Recognizer from './recognizer.js';
 import G from './global.js';
+import {Image2D} from './Image2D.js';
 
 
 // Main 
@@ -23,20 +24,23 @@ const mainLoop = function () {
     G.ctx2D.drawImage(G.capture, 0, 0, G.captureWidth, G.captureHeight, 0, (h - h * ratio) / 2, w, h * ratio);
 
     // recognise and identifying marker
-    let markerQuad = Recognizer.recognizeMarker(G.src.canvas); // renvoie une map {K:id,V:quad}
-    G.markersManager.updateFromRecognizer(markerQuad);
+    let idsQuads = Recognizer.recognizeMarker(G.src.canvas); // renvoie une map {K:id,V:quad}
+    G.markersManager.updateFromRecognizer(idsQuads);
     G.draw2D.clearRect(0, 0, 500, 500);
     G.markersManager.drawAllQuad(G.draw2D);
 
     //three and renderer
     G.scene2D.background.needsUpdate = true;
-    if (G.markersManager.mesMarker.has(1017)){
+    G.toolManager.updateView();
+
+    /*if (G.markersManager.mesMarker.has(1017)) {
         let mk = G.markersManager.mesMarker.get(1017);
-        if (mk.quad !== undefined){
+        if (mk.quad !== undefined) {
             G.img2d1.update(mk.quad)
         }
-    }
-    G.renderer.render(G.scene2D,G.camera2D);
+    }*/
+
+    G.renderer.render(G.scene2D, G.camera2D);
 
 
     window.requestAnimationFrame(mainLoop);
@@ -45,6 +49,11 @@ const mainLoop = function () {
 const initialize = function () {
     console.log('start');
     G.initGlobal();
+    //103-314-1017-982
+    let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
+   // let tool2 = G.makeTool(G.makeMarker(103), new Image2D('poluSSJ2'));
+   // let tool3 = G.makeTool(G.makeMarker(314), new Image2D('poluSSJ2'));
+   // let tool4 = G.makeTool(G.makeMarker(982), new Image2D('poluSSJ2'));
     mainLoop();
 }
 

@@ -4,6 +4,7 @@ import G from './global.js';
 export class Image2D {
 
     node;
+    tool;
 
     constructor(idImg) { // idImg : HTML id
 
