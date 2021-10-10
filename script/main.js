@@ -33,13 +33,6 @@ const mainLoop = function () {
     G.scene2D.background.needsUpdate = true;
     G.toolManager.updateView();
 
-    /*if (G.markersManager.mesMarker.has(1017)) {
-        let mk = G.markersManager.mesMarker.get(1017);
-        if (mk.quad !== undefined) {
-            G.img2d1.update(mk.quad)
-        }
-    }*/
-
     G.renderer.render(G.scene2D, G.camera2D);
 
 
@@ -51,9 +44,9 @@ const initialize = function () {
     G.initGlobal();
     //103-314-1017-982
     let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-   // let tool2 = G.makeTool(G.makeMarker(103), new Image2D('poluSSJ2'));
-   // let tool3 = G.makeTool(G.makeMarker(314), new Image2D('poluSSJ2'));
-   // let tool4 = G.makeTool(G.makeMarker(982), new Image2D('poluSSJ2'));
+    let tool2 = G.makeTool(G.makeMarker(103), new Image2D('poluSSJ2'));
+    let tool3 = G.makeTool(G.makeMarker(314), new Image2D('poluSSJ2'));
+    let tool4 = G.makeTool(G.makeMarker(982), new Image2D('poluSSJ2'));
     mainLoop();
 }
 
