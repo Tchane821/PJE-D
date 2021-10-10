@@ -44,9 +44,9 @@ const initialize = function () {
     G.initGlobal();
     //103-314-1017-982
     let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-    let tool2 = G.makeTool(G.makeMarker(103), new Image2D('poluSSJ2'));
-    let tool3 = G.makeTool(G.makeMarker(314), new Image2D('poluSSJ2'));
-    let tool4 = G.makeTool(G.makeMarker(982), new Image2D('poluSSJ2'));
+    let tool2 = G.makeTool(G.makeMarker(103), new Image2D('astro'));
+    let tool3 = G.makeTool(G.makeMarker(314), new Image2D('jdr'));
+    let tool4 = G.makeTool(G.makeMarker(982), new Image2D('ihad'));
     mainLoop();
 }
 
