@@ -87,8 +87,7 @@ export default class Recognizer {
         let res;
         cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY); // nuace de gris
         cv.blur(src, src, {width: 5, height: 5});
-        let luminositerMoyenne = 127;
-        cv.threshold(src, src, luminositerMoyenne, 255, cv.THRESH_BINARY);
+        cv.threshold(src, src, G.luminositerMoyenne, 255, cv.THRESH_BINARY);
         cv.imshow("feedbackM", src);
 
         //test determinant

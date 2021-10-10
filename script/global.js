@@ -1,6 +1,5 @@
 import {MarkerManager} from './MarkerManager.js';
 import * as THREE from '../lib/three/build/three.module.js';
-import {Image2D} from './Image2D.js';
 import {ToolManager} from './ToolManager.js';
 import {Quad} from './Quad.js';
 
@@ -24,7 +23,7 @@ export default class G {
     static renderer;     // THREE.js renderer
     static scene2D;      // 2D scene (THREE.js) : example : texture onto 2D quad (without 3D pose)
     static toolManager = new ToolManager(); // le manager de tool
-    //static img2d1;
+    static luminositerMoyenne;
 
 
     // default globals setup
@@ -46,6 +45,8 @@ export default class G {
             G.captureHeight = G.capture.naturalHeight;
         }
 
+        G.luminositerMoyenne = 127;
+
         // three js
         G.scene2D = new THREE.Scene();
         G.scene2D.background = new THREE.CanvasTexture(G.src.canvas);
@@ -54,7 +55,6 @@ export default class G {
         G.renderer = new THREE.WebGLRenderer({canvas: document.getElementById("three")});
         G.renderer.setSize(500, 500);
         G.renderer.autoClear = true;
-        //G.img2d1 = new Image2D('poluSSJ2');
 
     }
 
