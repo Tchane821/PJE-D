@@ -5,12 +5,12 @@ export class Marker {
         this.id = id;
         this.quad = new Quad(); // this is the owner
         this.color = "green"; // quad color
-        this.TTL = 20; // création d'un time to live pour l'affichage
+        this.TTL = 10; // création d'un time to live pour l'affichage
     }
 
     update(quad) {
         this.quad.copy(quad);
-        this.TTL = 20;
+        this.TTL = 10;
     }
 
     drawMarker(ctx) {

@@ -2,6 +2,7 @@ import Wait from './wait.js';
 import Recognizer from './recognizer.js';
 import G from './global.js';
 import {Image2D} from './Image2D.js';
+import {Image2Dt} from './Image2Dt.js';
 
 
 // Main 
@@ -43,8 +44,10 @@ const initialize = function () {
     console.log('start');
     G.initGlobal();
     //103-314-1017-982
-    let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-    let tool2 = G.makeTool(G.makeMarker(103), new Image2D('astro'));
+    //let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
+    let tool1 = G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
+    //let tool2 = G.makeTool(G.makeMarker(103), new Image2D('astro'));
+    let tool2 = G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
     let tool3 = G.makeTool(G.makeMarker(314), new Image2D('jdr'));
     let tool4 = G.makeTool(G.makeMarker(982), new Image2D('ihad'));
     mainLoop();

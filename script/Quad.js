@@ -1,6 +1,6 @@
 export class Quad { // 2D quad
     constructor() {
-        this.t = [0, 0, 1, 0, 1, 1, 0, 1]; // [x0,y0,x1,y1,x2,y2,x3,y3] //resolution de sortie dans openCV
+        this.t = [-0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5]; // [x0,y0,x1,y1,x2,y2,x3,y3] //resolution de sortie dans openCV
     }
 
     copy(q) {
@@ -21,7 +21,6 @@ export class Quad { // 2D quad
     // in : t a 8-values array [x0,y0, ...] of the quad in window coordinates
     // carré finale : (-1,-1) , (-1, 0) , (-1, -1) , (0, -1)
     setFromWindow(width, height, t) {
-        // TODO (voir question sur la normalisation)  // 1 - ...
         this.t[0] = (t[0] * 2 / width) - 1;
         this.t[1] = (t[1] * 2 / height) - 1;
         this.t[2] = (t[2] * 2 / width) - 1;
