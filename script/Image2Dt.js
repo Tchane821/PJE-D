@@ -14,7 +14,10 @@ export class Image2Dt {
             map: new THREE.CanvasTexture(document.getElementById(idImg)),
             side: THREE.DoubleSide
         });
-        this.node = new THREE.Mesh(planGeometry, material); // THREE Object3D (Group or Mesh)
+        let nodeT = new THREE.Mesh(planGeometry, material); // THREE Object3D (Group or Mesh)
+        let nodeParent = new THREE.Group();
+        nodeParent.add(nodeT);
+        this.node = nodeParent;
         G.scene2D.add(this.node);
     }
 
@@ -28,6 +31,8 @@ export class Image2Dt {
         this.node.matrix.copy(matrices);
         this.node.matrixAutoUpdate = false;
         transform.delete();
+        let n=this.node.children[0];
+        n.rotateOnAxis(new THREE.Vector3(1,0,0),Math.PI/16.0);
     }
 
     convertThree_44(transform) {
