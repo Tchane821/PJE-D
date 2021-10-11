@@ -12,7 +12,7 @@ export class MarkerMatrix {
         let distance = dico["distance"];
         let brot = 0;
         let bestId = dico["id"];
-        if (distance == 0) return {id: bestId, dist: distance, rot: brot};
+        if (distance === 0) return {id: bestId, dist: distance, rot: brot};
         for (let rot = 1; rot <= 3; ++rot) {
             this.rotaterM90();
             let dicoT = this.nearestId();
@@ -23,7 +23,7 @@ export class MarkerMatrix {
                 bestId = tempId;
                 brot = rot;
             }
-            if (distance == 0) return {id: bestId, dist: distance, rot: brot * 90};
+            if (distance === 0) return {id: bestId, dist: distance, rot: brot * 90};
         }
         if (distance >= 15) return {id: -1, dist: 25, rot: -1};
         this.id = bestId;
@@ -36,8 +36,7 @@ export class MarkerMatrix {
             let x = i % 5;
             let y = Math.floor(i / 5);
             let nx = 5 - y - 1;
-            let ny = x;
-            let np = ny * 5 + nx;
+            let np = x * 5 + nx;
             mt[np] = this.m[i];
         }
         this.m = mt;
@@ -74,7 +73,7 @@ export class MarkerMatrix {
     getDistanceOfValue(id, line) {
         let res = {values: id, dist: 0};
         for (let i = 0; i < 5; i++) { // id
-            if (id[i] != line[i]) {
+            if (id[i] !== line[i]) {
                 res["dist"] = res["dist"] + 1;
             }
         }
@@ -103,9 +102,9 @@ export class MarkerMatrix {
                 else if (nbWhite < 2) {
                     valueSquare = 0;
                 } // black value
-                if (valueSquare == -1) return false; // neither black nor white => rejected
-                if (x == 0 || x == 6 || y == 0 || y == 6) { // border : should be black
-                    if (valueSquare != 0) return false; // not a border => not a marker => rejected
+                if (valueSquare === -1) return false; // neither black nor white => rejected
+                if (x === 0 || x === 6 || y === 0 || y === 6) { // border : should be black
+                    if (valueSquare !== 0) return false; // not a border => not a marker => rejected
                 } else {
                     this.m[square] = valueSquare;
                     square += 1;
@@ -130,7 +129,7 @@ export class MarkerMatrix {
         fbctx.fillStyle = 'black';
         for (let y = 0; y < 5; y++) {
             for (let x = 0; x < 5; x++) {
-                if (this.m[y * 5 + x] == 0) {
+                if (this.m[y * 5 + x] === 0) {
                     fbctx.fillRect(x * stepX, y * stepY, stepX, stepY);
                 }
             }

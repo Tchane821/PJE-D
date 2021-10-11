@@ -52,30 +52,26 @@ export class Quad { // 2D quad
     // in : ctx : 2d context of a canvas
     // in : 2d context color of the quad ('red' for example)
     draw2D(ctx, color) {
-        ctx.beginPath();
-        let pts = this.toWindow([ctx.canvas.width, ctx.canvas.height]);
-        ctx.strokeStyle = color;
-        ctx.fillRect(pts[0], pts[1], 4, 4);
-        ctx.moveTo(pts[0], pts[1]);
-        ctx.lineTo(pts[2], pts[3]);
-        ctx.lineTo(pts[4], pts[5]);
-        ctx.lineTo(pts[6], pts[7]);
-        ctx.closePath(0);
-        ctx.stroke();
+            ctx.beginPath();
+            let pts = this.toWindow([ctx.canvas.width, ctx.canvas.height]);
+            ctx.strokeStyle = color;
+            ctx.fillRect(pts[0], pts[1], 4, 4);
+            ctx.moveTo(pts[0], pts[1]);
+            ctx.lineTo(pts[2], pts[3]);
+            ctx.lineTo(pts[4], pts[5]);
+            ctx.lineTo(pts[6], pts[7]);
+            ctx.closePath(0);
+            ctx.stroke();
     }
 
-    rotateQ90i(i) {
-        let qt = [[this.t[0], this.t[1]], [this.t[2], this.t[3]], [this.t[4], this.t[5]], [this.t[6], this.t[7]]];
-        for (i; i > 0; i--) {
-            for (let k = 0; k < 25; k++) {
-                let x = k % 5;
-                let y = Math.floor(k / 5);
-                let nx = 5 - y - 1;
-                let ny = x;
-                let np = ny * 5 + nx;
-                qt[np] = this.t[k];
-            }
+    rotateQ90i(angleQuad) {
+        for (angleQuad; angleQuad > 0; angleQuad--) {
+            let qt = [];
+            qt[0] = [this.t[6], this.t[7]];
+            qt[1] = [this.t[0], this.t[1]];
+            qt[2] = [this.t[2], this.t[3]];
+            qt[3] = [this.t[4], this.t[5]];
+            this.t = qt.flat();
         }
-        this.t = qt.flat();
     }
 }

@@ -33,7 +33,7 @@ export default class Recognizer {
         for (let i = 0; i < lesContours.size(); i++) {
             let cnt = lesContours.get(i);
             cv.approxPolyDP(cnt, cnt, 3, true);
-            if (cnt.size().height == 4) {
+            if (cnt.size().height === 4) {
                 lesbonsContours.push_back(cnt);
             }
         }
@@ -51,7 +51,7 @@ export default class Recognizer {
             if (mat.fromImg(extractedMarker)) {
                 let dicoRes = mat.recognize();
                 q.rotateQ90i(dicoRes["rot"] / 90);
-                if (dicoRes["id"] != -1) {
+                if (dicoRes["id"] !== -1) {
                     mat.drawMatrix([150, 150], "feedbackM" + i);
                     mat.writeId("idMatrix" + i);
                     res.set(dicoRes["id"], q);
@@ -84,11 +84,10 @@ export default class Recognizer {
     // return cv.Mat le quad
     static extractionQuad(srcCanvas, q, s, fb) {
         let src = cv.imread(srcCanvas);
-        let res = new cv.Mat();
+        let res;
         cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY); // nuace de gris
         cv.blur(src, src, {width: 5, height: 5});
-        let luminositerMoyenne = 127;
-        cv.threshold(src, src, luminositerMoyenne, 255, cv.THRESH_BINARY);
+        cv.threshold(src, src, G.luminositerMoyenne, 255, cv.THRESH_BINARY);
         cv.imshow("feedbackM", src);
 
         //test determinant

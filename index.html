@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="author" content="univ-lille" />
-<title>
-  Marker
-</title>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="univ-lille"/>
+    <title>
+        Marker
+    </title>
 
-<link type="text/css" rel="stylesheet" href="main.css" />
-<script src="lib/opencv.js"></script>
-<script src="script/main.js" type="module"></script>
+    <link type="text/css" rel="stylesheet" href="main.css"/>
+    <script src="lib/opencv.js"></script>
+    <script src="script/main.js" type="module"></script>
 
 
 </head>
@@ -19,94 +19,93 @@
 
 <!-- capture source (static image or video/webcam) : will be copied in openCV source to be analyzed-->
 <div id="capture">
-<h3>image and video/webcam capture + Final result</h3>
+    <h3>image and video/webcam capture + Final result</h3>
 
-<img id="image" src="data/imFixe01.png" width="500" height="500"/>
-<video id="video" width="500" height="500" src="data/cap00.webm" autoplay loop controls></video>
-<canvas id="three"width="500" height="500"></canvas>
+    <img id="image" src="data/imgTest/imFixe01.png" width="500" height="500" alt=""/>
+    <video id="video" width="500" height="500" src="data/cap00.webm" autoplay loop controls></video>
 </div>
 
 <div id="cvsource">
-<h3>OpenCV source (copy of capture) and feedback (dstcv1 and dstcv2)</h3>
-<!-- openCV source -->
-<canvas id="src" width="500" height="500"></canvas>
-<canvas id="dstcv1" width="500" height="500"></canvas>
-<canvas id="dstcv2" width="500" height="500"></canvas>
-<canvas id="dstcv3" width="500" height="500"></canvas>
-<canvas id="dstcv4" width="500" height="500"></canvas>
+    <h3>OpenCV source (copy of capture) and feedback (dstcv1 and dstcv2)</h3>
+    <!-- openCV source -->
+    <canvas id="src" width="500" height="500"></canvas>
+    <canvas id="dstcv1" width="500" height="500"></canvas>
+    <canvas id="dstcv2" width="500" height="500"></canvas>
+    <canvas id="dstcv3" width="500" height="500"></canvas>
+    <canvas id="dstcv4" width="500" height="500"></canvas>
 </div>
 
 <div id="extracted">
-  <h3>extracted quad images</h3>
-  <canvas id="draw2D" width="500" height="500"></canvas>
-  <!-- marker feedback -->
-  <canvas id="feedback0"></canvas>
-  <canvas id="feedback1"></canvas>
-  <canvas id="feedback2"></canvas>
-  <canvas id="feedback3"></canvas>
-  <canvas id="feedback4"></canvas>
-  <canvas id="feedback5"></canvas>
-  <canvas id="feedback6"></canvas>
-  <canvas id="feedback7"></canvas>
-  <canvas id="feedback8"></canvas>
+    <h3>extracted quad images</h3>
+    <canvas id="draw2D" width="500" height="500"></canvas>
+    <!-- marker feedback -->
+    <canvas id="feedback0"></canvas>
+    <canvas id="feedback1"></canvas>
+    <canvas id="feedback2"></canvas>
+    <canvas id="feedback3"></canvas>
+    <canvas id="feedback4"></canvas>
+    <canvas id="feedback5"></canvas>
+    <canvas id="feedback6"></canvas>
+    <canvas id="feedback7"></canvas>
+    <canvas id="feedback8"></canvas>
 </div>
-  <div id="markermatrix">
+<div id="markermatrix">
     <h3>Matrix marker</h3>
     <canvas id="feedbackM" width="150" height="150" style="display :inline-block"></canvas>
     <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM0" width="150" height="150"></canvas>
-      <p id="idMatrix0">NaN</p>
+        <canvas class="matrixNB" id="feedbackM0" width="150" height="150"></canvas>
+        <p id="idMatrix0">NaN</p>
     </div>
     <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM1" width="150" height="150"></canvas>
-      <p id="idMatrix1">NaN</p>
+        <canvas class="matrixNB" id="feedbackM1" width="150" height="150"></canvas>
+        <p id="idMatrix1">NaN</p>
     </div>
     <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM2" width="150" height="150"></canvas>
-      <p id="idMatrix2">NaN</p>
+        <canvas class="matrixNB" id="feedbackM2" width="150" height="150"></canvas>
+        <p id="idMatrix2">NaN</p>
     </div>
     <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM3" width="150" height="150"></canvas>
-      <p id="idMatrix3">NaN</p>
+        <canvas class="matrixNB" id="feedbackM3" width="150" height="150"></canvas>
+        <p id="idMatrix3">NaN</p>
     </div>
     <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM4" width="150" height="150"></canvas>
-      <p id="idMatrix4">NaN</p>
+        <canvas class="matrixNB" id="feedbackM4" width="150" height="150"></canvas>
+        <p id="idMatrix4">NaN</p>
     </div>
     <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM5" width="150" height="150"></canvas>
-      <p id="idMatrix5">NaN</p>
+        <canvas class="matrixNB" id="feedbackM5" width="150" height="150"></canvas>
+        <p id="idMatrix5">NaN</p>
     </div>
-    <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM6" width="150" height="150"></canvas>
-      <p id="idMatrix6">NaN</p>
-    </div>
-    <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM7" width="150" height="150"></canvas>
-      <p id="idMatrix7">NaN</p>
-    </div>
-    <div style="display :inline-block">
-      <canvas class="matrixNB" id="feedbackM8" width="150" height="150"></canvas>
-      <p id="idMatrix8">NaN</p>
-    </div>
-  </div>
+</div>
+
+<div>
+    <h3>Three.js</h3>
+    <canvas id="three" width="500" height="500"></canvas>
+    <img id="poluSSJ2" src="data/imgTest/pouluSSJ2350.png" style="display: none" alt=""/>
+    <img id="astro" src="data/imgTest/astrocasque.jpg" style="display: none" alt=""/>
+    <img id="jdr" src="data/imgTest/discord-logo-jdr.png" style="display: none" alt=""/>
+    <img id="ihad" src="data/imgTest/lutherKingTeeshirt.png" style="display: none" alt=""/>
+</div>
+
 
 <div id="result">
-  <h3>Results (canvas2D, canvasBg3D)</h3>
-<!-- result -->
-<canvas id="canvas2D" width="500" height="500"></canvas>
-<canvas id="canvasBg3D" width="500" height="500"></canvas>
+    <h3>Results (canvas2D, canvasBg3D)</h3>
+    <!-- result -->
+    <canvas id="canvas2D" width="500" height="500"></canvas>
+    <canvas id="canvasBg3D" width="500" height="500"></canvas>
 </div>
 
 <div id="texture">
-  <h3>texture</h3>
-<!-- texture for feedback-->
-<img id="lagoon" src="data/im.jpg"/>
-<img id="bird" src="data/bird.png"/>
-<img id="jupiter" src="data/jupiter.jpg"/>
+    <h3>texture</h3>
+    <!-- texture for feedback-->
+    <img id="lagoon" src="data/imgTest/im.jpg" alt=""/>
+    <img id="bird" src="data/imgTest/bird.png" alt=""/>
+    <img id="jupiter" src="data/imgTest/jupiter.jpg" alt=""/>
 </div>
 
-<audio id="sound" controls><source src="data/02_As_you_know.mp3" type="audio/mpeg"/></audio>
+<audio id="sound" controls>
+    <source src="data/02_As_you_know.mp3" type="audio/mpeg"/>
+</audio>
 
 
 </body>
