@@ -24,6 +24,10 @@ export default class G {
     static scene2D;      // 2D scene (THREE.js) : example : texture onto 2D quad (without 3D pose)
     static toolManager = new ToolManager(); // le manager de tool
     static luminositerMoyenne;
+    static scene3D;
+    static camera3D;
+    static renderer3D;
+
 
 
     // default globals setup
@@ -47,14 +51,23 @@ export default class G {
 
         G.luminositerMoyenne = 127;
 
-        // three js
+        // three js 2D
         G.scene2D = new THREE.Scene();
         G.scene2D.background = new THREE.CanvasTexture(G.src.canvas);
         G.camera2D = new THREE.OrthographicCamera(-1, 1, -1, 1, -1, 1);
         G.camera2D.position.set(0, 0, 0);
-        G.renderer = new THREE.WebGLRenderer({canvas: document.getElementById("three")});
+        G.renderer = new THREE.WebGLRenderer({canvas: document.getElementById("three2D")});
         G.renderer.setSize(500, 500);
         G.renderer.autoClear = true;
+
+        // three js 3D
+        G.scene3D = new THREE.Scene();
+        G.camera3D = new THREE.PerspectiveCamera(90,1,1,1000);
+        G.camera3D.position.set(0,0,0);
+        G.renderer3D = new THREE.WebGLRenderer({canvas: document.getElementById("three3D")});
+        let light=new THREE.DirectionalLight(0xffffff,1.0); // lumière blanche maximale
+        light.position.set(0,0,1); // direction d'où provient l'éclairage (depuis l'axe $z$ ici).
+        G.scene3D.add(light);
 
     }
 

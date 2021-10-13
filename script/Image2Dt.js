@@ -31,8 +31,8 @@ export class Image2Dt {
         this.node.matrix.copy(matrices);
         this.node.matrixAutoUpdate = false;
         transform.delete();
-        let n=this.node.children[0];
-        n.rotateOnAxis(new THREE.Vector3(1,0,0),Math.PI/16.0);
+        let n = this.node.children[0];
+        n.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 16.0);
     }
 
     convertThree_44(transform) {

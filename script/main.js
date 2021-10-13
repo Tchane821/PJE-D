@@ -3,6 +3,7 @@ import Recognizer from './recognizer.js';
 import G from './global.js';
 import {Image2D} from './Image2D.js';
 import {Image2Dt} from './Image2Dt.js';
+import {ViewCube} from './ViewCube.js';
 
 
 // Main 
@@ -33,12 +34,16 @@ const mainLoop = function () {
     //three and renderer
     G.scene2D.background.needsUpdate = true;
     G.toolManager.updateView();
-
+    let vc = new ViewCube();
+    vc.update();
+    G.renderer.autoClear = true;
     G.renderer.render(G.scene2D, G.camera2D);
-
+    G.renderer.autoClear = false;
+    G.renderer.render(G.scene3D, G.camera3D);
 
     window.requestAnimationFrame(mainLoop);
 };
+
 // init
 const initialize = function () {
     console.log('start');
