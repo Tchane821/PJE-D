@@ -1,40 +1,36 @@
-import {Quad} from './Quad.js';
-import {Pose} from './Pose.js';
 import * as THREE from '../lib/three/build/three.module.js';
+import G from './global.js';
+import {Quad} from './Quad.js';
 
-export class Marker {
+export class Image2Dtp {
 
-    constructor(id) {
-        this.id = id;
-        this.quad = new Quad(); // this is the owner
-        this.color = "green"; // quad color
-        this.pose = new Pose();
-        this.TTL = 10; // création d'un time to live pour l'affichage
+    node;
+    tool;
+
+    constructor(idImg) { // idImg : HTML id
+
+        let planGeometry = new THREE.PlaneGeometry(1, 1);
+        let material = new THREE.MeshBasicMaterial({
+            map: new THREE.CanvasTexture(document.getElementById(idImg)),
+            side: THREE.DoubleSide
+        });
+        let nodeT = new THREE.Mesh(planGeometry, material); // THREE Object3D (Group or Mesh)
+        let nodeParent = new THREE.Group();
+        nodeParent.add(nodeT);
+        this.node = nodeParent;
+        G.scene2D.add(this.node);
     }
 
+
+    // update transformation/geometry
     update(quad) {
-        this.quad.copy(quad);
-        this.updatePose(quad);
-        this.TTL = 10;
-    }
-
-    updatePose(quad){
         let quadSrc = cv.matFromArray(4, 1, cv.CV_32FC2, new Quad().t);
         let quadDst = cv.matFromArray(4, 1, cv.CV_32FC2, quad.t);
         let transform = cv.getPerspectiveTransform(quadSrc, quadDst);
         let matrices = this.convertThree_44(transform);
-        this.pose.setFromHomography(matrices);
-    }
-
-    drawMarker(ctx) {
-        if (this.TTL !== 0) {
-            this.quad.draw2D(ctx, this.color);
-            this.TTL -= 1;
-        }
-    }
-
-    getPose(){
-        return this.pose;
+        this.node.matrix.copy(matrices);
+        this.node.matrixAutoUpdate = false;
+        transform.delete();
     }
 
     convertThree_44(transform) {

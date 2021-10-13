@@ -34,8 +34,6 @@ const mainLoop = function () {
     //three and renderer
     G.scene2D.background.needsUpdate = true;
     G.toolManager.updateView();
-    let vc = new ViewCube();
-    vc.update();
     G.renderer.autoClear = true;
     G.renderer.render(G.scene2D, G.camera2D);
     G.renderer.autoClear = false;
@@ -50,11 +48,13 @@ const initialize = function () {
     G.initGlobal();
     //103-314-1017-982
     //let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-    let tool1 = G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
+    //let tool1 = G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
+    let tool1 = G.makeTool(G.makeMarker(1017), new ViewCube());
     //let tool2 = G.makeTool(G.makeMarker(103), new Image2D('astro'));
     let tool2 = G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
     let tool3 = G.makeTool(G.makeMarker(314), new Image2D('jdr'));
     let tool4 = G.makeTool(G.makeMarker(982), new Image2D('ihad'));
+
     mainLoop();
 }
 

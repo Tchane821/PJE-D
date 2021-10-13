@@ -4,6 +4,7 @@ import * as THREE from '../lib/three/build/three.module.js';
 export class NodePose3D {
 
     node;
+    tool;
 
     constructor() {
         this.node = new THREE.Group();
@@ -11,6 +12,10 @@ export class NodePose3D {
     }
 
     update() {
-
+        if (this.tool !== undefined) {
+            let m = this.tool.marker.getPose().getMatrix4();
+            this.node.matrix.copy(m);
+            this.node.matrixAutoUpdate = false;
+        }
     }
 }
