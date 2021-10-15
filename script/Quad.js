@@ -66,11 +66,10 @@ export class Quad { // 2D quad
     rotateQ90i(angleQuad) {
         for (angleQuad; angleQuad > 0; angleQuad--) {
             let qt = [];
-            qt[0] = [this.t[6], this.t[7]];
-            qt[1] = [this.t[0], this.t[1]];
-            qt[2] = [this.t[2], this.t[3]];
-            qt[3] = [this.t[4], this.t[5]];
-            this.t = qt.flat();
+            for (let i = 0; i < 8; i++){
+            qt[i] = this.t[(i + 2) % 8];
+            }
+            this.t = qt
         }
     }
 }

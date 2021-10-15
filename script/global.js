@@ -26,7 +26,6 @@ export default class G {
     static luminositerMoyenne;
     static scene3D;
     static camera3D;
-    static renderer3D;
 
 
 
@@ -64,11 +63,9 @@ export default class G {
         G.scene3D = new THREE.Scene();
         G.camera3D = new THREE.PerspectiveCamera(90,1,1,1000);
         G.camera3D.position.set(0,0,0);
-        G.renderer3D = new THREE.WebGLRenderer({canvas: document.getElementById("three3D")});
         let light=new THREE.DirectionalLight(0xffffff,1.0); // lumière blanche maximale
         light.position.set(0,0,1); // direction d'où provient l'éclairage (depuis l'axe $z$ ici).
         G.scene3D.add(light);
-
     }
 
     static makeTool(marker, view) {

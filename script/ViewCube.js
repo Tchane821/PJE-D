@@ -16,6 +16,8 @@ export class ViewCube extends NodePose3D {
 
     update() {
         super.update();
+        let n = this.node.children[0];
+        n.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI / 24.0);
     }
 
 }

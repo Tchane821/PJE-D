@@ -11,17 +11,17 @@ export class Pose {
     // in m : THREE.Matrix4
     setFromHomography(m) {
         this.xAxis.x = m.elements[0];
-        this.xAxis.y = m.elements[1];
+        this.xAxis.y = -m.elements[1];
         this.xAxis.z = -m.elements[3];
 
         this.yAxis.x = m.elements[4];
-        this.yAxis.y = m.elements[5];
+        this.yAxis.y = -m.elements[5];
         this.yAxis.z = -m.elements[7];
 
         this.zAxis.crossVectors(this.xAxis, this.yAxis);
 
         this.position.x = m.elements[12];
-        this.position.y = m.elements[13];
+        this.position.y = -m.elements[13];
         this.position.z = -m.elements[15];
 
 
@@ -36,7 +36,7 @@ export class Pose {
 
     getMatrix4(){
         let m = new THREE.Matrix4();
-        m.makeBasis(this.xAxis,this.zAxis,this.zAxis);
+        m.makeBasis(this.xAxis,this.yAxis,this.zAxis);
         m.setPosition(this.position);
         return m;
     }

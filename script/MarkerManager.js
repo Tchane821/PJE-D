@@ -18,7 +18,7 @@ export class MarkerManager {
     // update the marker identified by id with the quad. ent = [K,V] = [id,V]
     update(k, v) {
         let m;
-        if (this.mesMarker.has(k)) {  // si existe déjà on met à jour le quad du marker existant
+        if (this.mesMarker.has(k)) {
             m = this.mesMarker.get(k);
         } else {  // si pas encore le MarkerManager on en crée un ("normalement" il n'est d'ailleurs pas associé à un tool dans ce cas)
             m = this.makeMarker(k, v);

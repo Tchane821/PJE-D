@@ -13,7 +13,7 @@ export class NodePose3D {
 
     update() {
         if (this.tool !== undefined) {
-            let m = this.tool.marker.getPose().getMatrix4();
+            let m = this.tool.marker.getPoseMoyenne().getMatrix4();
             this.node.matrix.copy(m);
             this.node.matrixAutoUpdate = false;
         }
