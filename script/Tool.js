@@ -1,5 +1,3 @@
-import {Quad} from './Quad.js';
-
 export class Tool {
 
     marker;
@@ -12,12 +10,15 @@ export class Tool {
     }
 
     updateView() {
-        if (this.marker.TTL !== 0) {
+        if (this.marker.TTL > 0) {
+            this.view.node.traverse(child => {
+                child.visible = true;
+            });
             this.view.update(this.marker.quad);
-        }else{
-            let fq = new Quad();
-            fq.t = [0,0,0,0,0,0,0,0];
-            this.view.update(fq);
+        } else {
+            this.view.node.traverse(child => {
+                child.visible = false;
+            });
         }
     }
 

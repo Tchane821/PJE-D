@@ -26,7 +26,7 @@ export default class G {
     static luminositerMoyenne;
     static scene3D;
     static camera3D;
-
+    static waitLoading = 0;
 
 
     // default globals setup

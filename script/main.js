@@ -4,7 +4,7 @@ import G from './global.js';
 import {Image2D} from './Image2D.js';
 import {Image2Dt} from './Image2Dt.js';
 import {ViewCube} from './ViewCube.js';
-
+import {GLTF} from './Gltf.js'
 
 // Main 
 const main = function () {
@@ -16,6 +16,12 @@ const main = function () {
 
 // mainloop
 const mainLoop = function () {
+
+    if (G.waitLoading !== 0) {//>> waiting Three.js models loading
+        console.log("wait loader");
+        window.requestAnimationFrame(mainLoop);
+        return; // do nothing
+    } //<< waiting Three.js models loading
 
     // init and start drawing
     let ratio = G.captureHeight / G.captureWidth;
@@ -47,13 +53,13 @@ const initialize = function () {
     console.log('start');
     G.initGlobal();
     //103-314-1017-982
-    //let tool1 = G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-    //let tool1 = G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
-    let tool1 = G.makeTool(G.makeMarker(1017), new ViewCube());
-    //let tool2 = G.makeTool(G.makeMarker(103), new Image2D('astro'));
-    let tool2 = G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
-    let tool3 = G.makeTool(G.makeMarker(314), new Image2D('jdr'));
-    let tool4 = G.makeTool(G.makeMarker(982), new Image2D('ihad'));
+    //G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
+    //G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
+    G.makeTool(G.makeMarker(1017), new ViewCube());
+    //G.makeTool(G.makeMarker(103), new Image2D('astro'));
+    G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
+    G.makeTool(G.makeMarker(314), new Image2D('jdr'));
+    G.makeTool(G.makeMarker(982), new GLTF('./data/3d/truck_02.gltf'));
 
     mainLoop();
 }

@@ -10,14 +10,14 @@ export class Marker {
         this.color = "green"; // quad color
         this.pose = new Pose();
         this.poses = [];
-        this.TTL = 10; // création d'un time to live pour l'affichage
-        this.nbPoseMoyenne = 20;
+        this.nbPoseMoyenne = 15;
+        this.TTL = 0;
     }
 
-    update(quad) {
+    updateQ(quad) {
         this.quad.copy(quad);
         this.updatePose(quad);
-        this.TTL = 10;
+        this.TTL = 15;
     }
 
     updatePose(quad) {
@@ -25,42 +25,33 @@ export class Marker {
         let quadDst = cv.matFromArray(4, 1, cv.CV_32FC2, quad.t);
         let transform = cv.getPerspectiveTransform(quadSrc, quadDst);
         let matrices = this.convertThree_44(transform);
-        this.pose.setFromHomography(matrices);
+        let pose = new Pose();
+        pose.setFromHomography(matrices);
         if (this.poses.length > this.nbPoseMoyenne - 1) {
             this.poses.shift();
         }
-        this.poses.push(this.pose);
+        this.poses.push(pose);
     }
 
     drawMarker(ctx) {
-        if (this.TTL !== 0) {
+        if (this.TTL > 0) {
             this.quad.draw2D(ctx, this.color);
-            this.TTL -= 1;
         }
-    }
-
-    getPose() {
-        return this.pose;
     }
 
     getPoseMoyenne() {
         let pMoyenne = new Pose();
         let tP = this.poses.length;
         for (let k = 0; k < tP; k++) {
-            pMoyenne.yAxis.addVectors(this.poses[k].yAxis, pMoyenne.yAxis);
-            pMoyenne.xAxis.addVectors(this.poses[k].xAxis, pMoyenne.xAxis);
-            pMoyenne.position.addVectors(this.poses[k].position, pMoyenne.position);
+            pMoyenne.xAxis = this.addVectors(this.poses[k].xAxis, pMoyenne.xAxis);
+            pMoyenne.yAxis = this.addVectors(this.poses[k].yAxis, pMoyenne.yAxis);
+            pMoyenne.zAxis = this.addVectors(this.poses[k].zAxis, pMoyenne.zAxis);
+            pMoyenne.position = this.addVectors(this.poses[k].position, pMoyenne.position);
         }
         pMoyenne.xAxis = this.divVector(pMoyenne.xAxis, tP);
         pMoyenne.yAxis = this.divVector(pMoyenne.yAxis, tP);
+        pMoyenne.zAxis = this.divVector(pMoyenne.zAxis, tP);
         pMoyenne.position = this.divVector(pMoyenne.position, tP);
-        pMoyenne.zAxis.crossVectors(pMoyenne.xAxis, pMoyenne.yAxis);
-        let lx = pMoyenne.xAxis.length();
-        let ly = pMoyenne.yAxis.length();
-        pMoyenne.position.multiplyScalar(2.0 / (lx + ly));
-        pMoyenne.xAxis.normalize();
-        pMoyenne.yAxis.normalize();
-        pMoyenne.zAxis.normalize();
         return pMoyenne;
     }
 
@@ -82,6 +73,14 @@ export class Marker {
         r.x = vector.x / d;
         r.y = vector.y / d;
         r.z = vector.z / d;
+        return r;
+    }
+
+    addVectors(v1, v2) {
+        let r = new THREE.Vector3(0, 0, 0);
+        r.x = v1.x + v2.x;
+        r.y = v1.y + v2.y;
+        r.z = v1.z + v2.z;
         return r;
     }
 
