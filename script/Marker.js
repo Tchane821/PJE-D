@@ -8,9 +8,8 @@ export class Marker {
         this.id = id;
         this.quad = new Quad(); // this is the owner
         this.color = "green"; // quad color
-        this.pose = new Pose();
         this.poses = [];
-        this.nbPoseMoyenne = 15;
+        this.nbPoseMoyenne = 10;
         this.TTL = 0;
     }
 
@@ -82,6 +81,10 @@ export class Marker {
         r.y = v1.y + v2.y;
         r.z = v1.z + v2.z;
         return r;
+    }
+
+    getPose(){
+        return this.getPoseMoyenne();
     }
 
 }

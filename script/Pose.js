@@ -1,6 +1,12 @@
 import * as THREE from '../lib/three/build/three.module.js';
 
 export class Pose {
+
+    xAxis;
+    yAxis;
+    zAxis;
+    position;
+
     constructor() {
         this.xAxis = new THREE.Vector3();
         this.yAxis = new THREE.Vector3();
@@ -34,9 +40,9 @@ export class Pose {
         this.zAxis.normalize();
     }
 
-    getMatrix4(){
+    getMatrix4() {
         let m = new THREE.Matrix4();
-        m.makeBasis(this.xAxis,this.yAxis,this.zAxis);
+        m.makeBasis(this.xAxis, this.yAxis, this.zAxis);
         m.setPosition(this.position);
         return m;
     }

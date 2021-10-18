@@ -27,6 +27,7 @@ export default class G {
     static scene3D;
     static camera3D;
     static waitLoading = 0;
+    static sound;
 
 
     // default globals setup

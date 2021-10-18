@@ -23,6 +23,7 @@
 
     <img id="image" src="data/imgTest/imFixe01.png" width="500" height="500" alt=""/>
     <video id="video" width="500" height="500" src="data/cap00.webm" autoplay loop controls></video>
+    <!--<video id="video" width="500" height="500" src="data/bullu.webm" autoplay loop controls></video>-->
 </div>
 
 <div id="cvsource">
@@ -78,15 +79,18 @@
     </div>
 </div>
 
-<div>
+<div style="display: inline-block">
     <h3>Three.js</h3>
     <canvas id="three2D" width="500" height="500"></canvas>
     <img id="poluSSJ2" src="data/imgTest/pouluSSJ2350.png" style="display: none" alt=""/>
     <img id="astro" src="data/imgTest/astrocasque.jpg" style="display: none" alt=""/>
     <img id="jdr" src="data/imgTest/discord-logo-jdr.png" style="display: none" alt=""/>
     <img id="ihad" src="data/imgTest/lutherKingTeeshirt.png" style="display: none" alt=""/>
+    <audio id="sound" controls>
+        <source src="data/02_As_you_know.mp3" type="audio/mpeg"/>
+    </audio>
+    <p style="display: inline-block" id="vgain"></p>
 </div>
-
 
 <div id="result">
     <h3>Results (canvas2D, canvasBg3D)</h3>
@@ -94,12 +98,6 @@
     <canvas id="canvas2D" width="500" height="500"></canvas>
     <canvas id="canvasBg3D" width="500" height="500"></canvas>
 </div>
-
-
-<audio id="sound" controls>
-    <source src="data/02_As_you_know.mp3" type="audio/mpeg"/>
-</audio>
-
 
 </body>
 
