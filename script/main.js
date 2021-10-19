@@ -5,6 +5,7 @@ import {Image2D} from './Image2D.js';
 import {Image2Dt} from './Image2Dt.js';
 import {ViewGeometrique, ViewSphere} from './ViewGeometrique.js';
 import {GLTF} from './Gltf.js'
+import {SoundView} from './SoundView.js';
 import {SoundTool} from './SoundTool.js';
 
 // Main 
@@ -72,6 +73,7 @@ const initialize = function () {
     let t1 = G.makeTool(G.makeMarker(982), new ViewSphere()); // première extrémité du contrôle du son
     let t2 = G.makeTool(G.makeMarker(103), new ViewSphere()); // deuxième extrémité du contrôle du son
     G.sound.volume(t1, t2); // les 2 outils qui contrôleront le volume de G.sound
+    G.makeTool(G.sound,new SoundView());
 
     mainLoop();
 }

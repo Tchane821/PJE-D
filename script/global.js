@@ -62,10 +62,10 @@ export default class G {
 
         // three js 3D
         G.scene3D = new THREE.Scene();
-        G.camera3D = new THREE.PerspectiveCamera(90,1,1,1000);
-        G.camera3D.position.set(0,0,0);
-        let light=new THREE.DirectionalLight(0xffffff,1.0); // lumière blanche maximale
-        light.position.set(0,0,1); // direction d'où provient l'éclairage (depuis l'axe $z$ ici).
+        G.camera3D = new THREE.PerspectiveCamera(90, 1, 1, 1000);
+        G.camera3D.position.set(0, 0, 0);
+        let light = new THREE.DirectionalLight(0xffffff, 1.0); // lumière blanche maximale
+        light.position.set(0, 0, 1); // direction d'où provient l'éclairage (depuis l'axe $z$ ici).
         G.scene3D.add(light);
     }
 
