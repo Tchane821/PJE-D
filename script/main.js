@@ -6,7 +6,7 @@ import {Image2Dt} from './Image2Dt.js';
 import {ViewGeometrique, ViewSphere} from './ViewGeometrique.js';
 import {GLTF} from './Gltf.js'
 import {SoundView} from './SoundView.js';
-import {SoundTool} from './SoundTool.js';
+import {SoundManager} from './SoundManager.js';
 
 // Main 
 const main = function () {
@@ -40,7 +40,7 @@ const mainLoop = function () {
     G.markersManager.drawAllQuad(G.draw2D);
 
     //le sound
-    G.sound.update()
+    G.sound.updateSound();
 
     //three and renderer
     G.scene2D.background.needsUpdate = true;
@@ -58,23 +58,23 @@ const initialize = function () {
     console.log('start');
     G.initGlobal();
     //103-314-1017-982
-    /*
-     //G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-     //G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
-     G.makeTool(G.makeMarker(1017), new ViewGeometrique());
-     //G.makeTool(G.makeMarker(103), new Image2D('astro'));
-     G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
-     G.makeTool(G.makeMarker(314), new Image2D('jdr'));
-     G.makeTool(G.makeMarker(982), new GLTF('./data/3d/truck_02.gltf'));
-     */
-    // le tp5
-
-    G.sound = new SoundTool(G.makeMarker(1017)); // où sera visualisé l'equalizer
-    let t1 = G.makeTool(G.makeMarker(982), new ViewSphere()); // première extrémité du contrôle du son
-    let t2 = G.makeTool(G.makeMarker(103), new ViewSphere()); // deuxième extrémité du contrôle du son
-    G.sound.volume(t1, t2); // les 2 outils qui contrôleront le volume de G.sound
-    G.makeTool(G.sound,new SoundView());
-
+    // parametre a changer pour changer d'exemple true / false
+    if (false) {
+        //G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
+        //G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
+        G.makeTool(G.makeMarker(1017), new ViewGeometrique());
+        //G.makeTool(G.makeMarker(103), new Image2D('astro'));
+        G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
+        G.makeTool(G.makeMarker(314), new Image2D('jdr'));
+        G.makeTool(G.makeMarker(982), new GLTF('./data/3d/truck_02.gltf'));
+    } else {
+        // le tp5
+        G.sound = new SoundManager();
+        let t1 = G.makeTool(G.makeMarker(982), new ViewSphere());
+        let t2 = G.makeTool(G.makeMarker(103), new ViewSphere());
+        G.sound.volume(t1, t2);
+        G.sound.setEgaliseur(G.makeTool(G.makeMarker(1017), new SoundView()));
+    }
     mainLoop();
 }
 
