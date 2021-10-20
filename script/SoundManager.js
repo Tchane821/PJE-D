@@ -6,7 +6,7 @@ export class SoundManager {
     // tool Gain
     v1;
     v2;
-    // tool egaliseur avec sa view
+    // tool egaliseur
     egaliseur;
     // vue du lien du Gain
     linkView
@@ -22,7 +22,7 @@ export class SoundManager {
         this.audioContext = new AudioContext();
         // la source
         this.source = this.audioContext.createMediaElementSource(document.getElementById('sound'));
-        // // outil pour contrôler le volume (init)
+        // outil pour contrôler le volume (init)
         this.gain = this.audioContext.createGain();
         this.source.connect(this.gain).connect(this.audioContext.destination);
         this.gain.gain.value = 0.8; // set le gain de départ

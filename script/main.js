@@ -10,7 +10,6 @@ import {SoundManager} from './SoundManager.js';
 
 // Main 
 const main = function () {
-
     // waiting for openCV loading and webcam setup. Call initialize when ok.
     Wait.waitAll().then(initialize).catch(mess => console.log(mess, mess.stack));
 }

@@ -4,9 +4,6 @@ import * as THREE from '../lib/three/build/three.module.js';
 
 export class SoundView extends NodePose3D {
 
-    node;
-    tool;
-
     constructor() {
         super();
         let material = new THREE.MeshPhongMaterial({color: 0x00ffff, side: THREE.DoubleSide});
