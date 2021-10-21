@@ -25,8 +25,7 @@ export class Tool {
     static distance(tool1, tool2) {
         let p1 = tool1.marker.getPose().position;
         let p2 = tool2.marker.getPose().position;
-        let res = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
-        return res;
+        return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
     }
 
 }
