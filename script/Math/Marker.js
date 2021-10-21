@@ -1,6 +1,6 @@
 import {Quad} from './Quad.js';
 import {Pose} from './Pose.js';
-import * as THREE from '../lib/three/build/three.module.js';
+import * as THREE from '../../lib/three/build/three.module.js';
 
 export class Marker {
 
@@ -83,7 +83,7 @@ export class Marker {
         return r;
     }
 
-    getPose(){
+    getPose() {
         return this.getPoseMoyenne();
     }
 

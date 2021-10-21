@@ -1,5 +1,5 @@
-import * as THREE from '../lib/three/build/three.module.js';
-import G from './global.js';
+import * as THREE from '../../lib/three/build/three.module.js';
+import G from '../global.js';
 
 export class Image2D {
 

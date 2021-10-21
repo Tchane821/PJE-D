@@ -1,7 +1,7 @@
-import G from './global.js';
+import G from '../global.js';
 import {NodePose3D} from './NodePose3D.js';
-import * as THREE from '../lib/three/build/three.module.js';
-import {GLTFLoader} from '../lib/three/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from '../../lib/three/build/three.module.js';
+import {GLTFLoader} from '../../lib/three/examples/jsm/loaders/GLTFLoader.d.ts';
 
 export class GLTF extends NodePose3D {
 

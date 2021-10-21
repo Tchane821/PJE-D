@@ -1,6 +1,6 @@
-import * as THREE from '../lib/three/build/three.module.js';
-import G from './global.js';
-import {Quad} from './Quad.js';
+import * as THREE from '../../lib/three/build/three.module.js';
+import G from '../global.js';
+import {Quad} from '../Math/Quad.js';
 
 export class Image2Dt {
 
@@ -8,7 +8,6 @@ export class Image2Dt {
     tool;
 
     constructor(idImg) { // idImg : HTML id
-
         let planGeometry = new THREE.PlaneGeometry(1, 1);
         let material = new THREE.MeshBasicMaterial({
             map: new THREE.CanvasTexture(document.getElementById(idImg)),

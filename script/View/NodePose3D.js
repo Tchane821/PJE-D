@@ -1,5 +1,5 @@
-import G from './global.js';
-import * as THREE from '../lib/three/build/three.module.js';
+import G from '../global.js';
+import * as THREE from '../../lib/three/build/three.module.js';
 
 export class NodePose3D {
 

@@ -1,4 +1,4 @@
-import {Tool} from './Tool.js'
+import {Tool} from '../Math/Tool.js'
 
 export class ToolManager {
 

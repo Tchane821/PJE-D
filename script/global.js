@@ -1,7 +1,7 @@
-import {MarkerManager} from './MarkerManager.js';
+import {MarkerManager} from './Manager/MarkerManager.js';
 import * as THREE from '../lib/three/build/three.module.js';
-import {ToolManager} from './ToolManager.js';
-import {Quad} from './Quad.js';
+import {ToolManager} from './Manager/ToolManager.js';
+import {Quad} from './Math/Quad.js';
 
 export default class G {
     // GLOBALS :

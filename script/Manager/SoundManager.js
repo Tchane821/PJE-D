@@ -1,5 +1,5 @@
-import {Tool} from './Tool.js';
-import {LinkView} from './LinkView.js';
+import {Tool} from '../Math/Tool.js';
+import {LinkView} from '../View/LinkView.js';
 
 export class SoundManager {
 
@@ -61,7 +61,7 @@ export class SoundManager {
         this.linkView = new LinkView(tool1, tool2);
     }
 
-    setEgaliseur(toolEg){
+    setEgaliseur(toolEg) {
         this.egaliseur = toolEg;
         this.egaliseur.dataArray = new Uint8Array(16);
     }

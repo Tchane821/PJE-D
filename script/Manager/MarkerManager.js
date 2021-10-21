@@ -1,4 +1,4 @@
-import {Marker} from './Marker.js';
+import {Marker} from '../Math/Marker.js';
 
 export class MarkerManager {
 

@@ -1,6 +1,6 @@
-import G from './global.js'
-import * as THREE from '../lib/three/build/three.module.js';
-import {Tool} from './Tool.js';
+import G from '../global.js'
+import * as THREE from '../../lib/three/build/three.module.js';
+import {Tool} from '../Math/Tool.js';
 
 export class LinkView {
 
@@ -25,6 +25,6 @@ export class LinkView {
         let pc = new THREE.Vector3((p0.x + p1.x) / 2, (p0.y + p1.y) / 2, (p0.z + p1.z) / 2);
         this.node.position.copy(pc);
         this.node.lookAt(p1);
-        this.node.scale.set(0.5,0.5,Tool.distance(this.t0,this.t1));
+        this.node.scale.set(0.5, 0.5, Tool.distance(this.t0, this.t1));
     }
 }

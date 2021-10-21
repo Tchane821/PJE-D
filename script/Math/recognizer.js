@@ -1,6 +1,6 @@
 import * as Q from './Quad.js';
 import * as Mm from './Markermatrix.js';
-import G from './global.js';
+import G from '../global.js';
 
 export default class Recognizer {
 

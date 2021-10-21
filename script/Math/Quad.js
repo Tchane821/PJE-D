@@ -51,23 +51,23 @@ export class Quad { // 2D quad
     // in : ctx : 2d context of a canvas
     // in : 2d context color of the quad ('red' for example)
     draw2D(ctx, color) {
-            ctx.beginPath();
-            let pts = this.toWindow([ctx.canvas.width, ctx.canvas.height]);
-            ctx.strokeStyle = color;
-            ctx.fillRect(pts[0], pts[1], 4, 4);
-            ctx.moveTo(pts[0], pts[1]);
-            ctx.lineTo(pts[2], pts[3]);
-            ctx.lineTo(pts[4], pts[5]);
-            ctx.lineTo(pts[6], pts[7]);
-            ctx.closePath(0);
-            ctx.stroke();
+        ctx.beginPath();
+        let pts = this.toWindow([ctx.canvas.width, ctx.canvas.height]);
+        ctx.strokeStyle = color;
+        ctx.fillRect(pts[0], pts[1], 4, 4);
+        ctx.moveTo(pts[0], pts[1]);
+        ctx.lineTo(pts[2], pts[3]);
+        ctx.lineTo(pts[4], pts[5]);
+        ctx.lineTo(pts[6], pts[7]);
+        ctx.closePath(0);
+        ctx.stroke();
     }
 
     rotateQ90i(angleQuad) {
         for (angleQuad; angleQuad > 0; angleQuad--) {
             let qt = [];
-            for (let i = 0; i < 8; i++){
-            qt[i] = this.t[(i + 2) % 8];
+            for (let i = 0; i < 8; i++) {
+                qt[i] = this.t[(i + 2) % 8];
             }
             this.t = qt
         }

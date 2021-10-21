@@ -1,6 +1,6 @@
 import {NodePose3D} from './NodePose3D.js';
-import * as THREE from '../lib/three/build/three.module.js';
-import G from './global.js';
+import * as THREE from '../../lib/three/build/three.module.js';
+import G from '../global.js';
 
 
 export class SoundView extends NodePose3D {

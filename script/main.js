@@ -1,12 +1,12 @@
 import Wait from './wait.js';
-import Recognizer from './recognizer.js';
+import Recognizer from './Math/recognizer.js';
 import G from './global.js';
-import {Image2D} from './Image2D.js';
-import {Image2Dt} from './Image2Dt.js';
-import {ViewGeometrique, ViewSphere} from './ViewGeometrique.js';
-import {GLTF} from './Gltf.js'
-import {SoundView} from './SoundView.js';
-import {SoundManager} from './SoundManager.js';
+import {Image2D} from './View/Image2D.js';
+import {Image2Dt} from './View/Image2Dt.js';
+import {ViewGeometrique, ViewSphere} from './View/ViewGeometrique.js';
+import {GLTF} from './View/Gltf.js'
+import {SoundView} from './View/SoundView.js';
+import {SoundManager} from './Manager/SoundManager.js';
 
 // Main 
 const main = function () {
@@ -39,7 +39,9 @@ const mainLoop = function () {
     G.markersManager.drawAllQuad(G.draw2D);
 
     //le sound
-    G.sound.updateSound();
+    if (G.sound !== undefined) {
+        G.sound.updateSound();
+    }
 
     //three and renderer
     G.scene2D.background.needsUpdate = true;
@@ -58,11 +60,11 @@ const initialize = function () {
     G.initGlobal();
     //103-314-1017-982
     // parametre a changer pour changer d'exemple true / false
-    if (false) {
+    if (true) {
         G.makeTool(G.makeMarker(1017), new ViewGeometrique());
         G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
         G.makeTool(G.makeMarker(314), new Image2D('jdr'));
-        G.makeTool(G.makeMarker(982), new GLTF('./data/3d/truck_02.gltf'));
+        G.makeTool(G.makeMarker(982), new GLTF("../data/3d/truck_02.gltf"));
     } else {
         // le tp5
         G.sound = new SoundManager();

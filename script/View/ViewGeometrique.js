@@ -1,5 +1,5 @@
 import {NodePose3D} from './NodePose3D.js';
-import * as THREE from '../lib/three/build/three.module.js';
+import * as THREE from '../../lib/three/build/three.module.js';
 
 export class ViewGeometrique extends NodePose3D {
 
@@ -26,7 +26,7 @@ export class ViewSphere extends NodePose3D {
 
     constructor() {
         super();
-        let geometry = new THREE.SphereGeometry(0.8, 20, 9,0,6.4,0,3.5);
+        let geometry = new THREE.SphereGeometry(0.8, 20, 9, 0, 6.4, 0, 3.5);
         let material = new THREE.MeshPhongMaterial({color: 0x00ffff, side: THREE.DoubleSide}); // color : red (8 bits),green(8 bits),blue(8 bits)
 
         let boule = new THREE.Mesh(geometry, material);
