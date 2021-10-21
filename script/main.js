@@ -59,10 +59,7 @@ const initialize = function () {
     //103-314-1017-982
     // parametre a changer pour changer d'exemple true / false
     if (false) {
-        //G.makeTool(G.makeMarker(1017), new Image2D('poluSSJ2'));
-        //G.makeTool(G.makeMarker(1017), new Image2Dt('poluSSJ2'));
         G.makeTool(G.makeMarker(1017), new ViewGeometrique());
-        //G.makeTool(G.makeMarker(103), new Image2D('astro'));
         G.makeTool(G.makeMarker(103), new Image2Dt('astro'));
         G.makeTool(G.makeMarker(314), new Image2D('jdr'));
         G.makeTool(G.makeMarker(982), new GLTF('./data/3d/truck_02.gltf'));
